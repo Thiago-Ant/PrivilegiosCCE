@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Consulta de Privilegios</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <img src="logo_iglesia_2.png" alt="Logo Iglesia" id="logo">
+    <h1>Consulta de Privilegios - CCE</h1>
+  </header>
+
+  <main>
+    <section class="form-container">
+      <form id="busquedaForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Ej: Juan" required>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" placeholder="Ej: Pérez" required>
+
+        <button type="submit" id="btn-buscar">Buscar</button>
+      </form>
+
+      <div id="resultado"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Catedral Cristiana Escobar – Todos los derechos reservados</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
