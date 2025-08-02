@@ -6,7 +6,21 @@ function mostrarMensaje(msg) {
 }
 
 function mostrarPrivilegios(privilegios) {
-  const resultadoDiv = document.getElementById('resultado');
+  const resultadosDiv = document.getElementById('resultado');
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const privilegiosFuturos = privilegios.filter(p => {
+    const fechaP = new Date(p.fecha);
+    fechaP.setHours(0, 0, 0, 0);
+    return fechaP >= hoy;
+  });
+
+  if (privilegiosFuturos.length === 0) {
+    resultadosDiv.innerHTML = `<p>No tenés más privilegios pendientes este mes.</p>`;
+    return;
+  }
 
   let html = `
     <table border="1" cellspacing="0" cellpadding="5">
@@ -20,12 +34,13 @@ function mostrarPrivilegios(privilegios) {
       <tbody>
   `;
 
-  privilegios.forEach(p => {
+  privilegiosFuturos.forEach(p => {
+    const fechaFormateada = formatearFecha(p.fecha);
     html += `
       <tr>
         <td>${p.privilegio}</td>
         <td>${p.servicio}</td>
-        <td>${formatearFecha(p.fecha)}</td>
+        <td>${fechaFormateada}</td>
       </tr>
     `;
   });
@@ -35,7 +50,7 @@ function mostrarPrivilegios(privilegios) {
     </table>
   `;
 
-  resultadoDiv.innerHTML = html;
+  resultadosDiv.innerHTML = html;
 }
 
 function formatearFecha(fechaStr) {
@@ -73,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formulario = document.getElementById('busquedaForm');
 
   formulario.addEventListener('submit', (event) => {
-    event.preventDefault(); // <--- evita que el form se envíe
+    event.preventDefault();
     const nombre = document.getElementById('nombre').value.trim();
     const apellido = document.getElementById('apellido').value.trim();
     buscarPrivilegios(nombre, apellido);
